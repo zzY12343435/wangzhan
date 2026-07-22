@@ -17,6 +17,7 @@ const item = {
 export default function Hero() {
   const videoRef = useRef(null);
   const heroRef = useRef(null);
+  const btnRef = useRef(null);
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
@@ -31,6 +32,23 @@ export default function Hero() {
       x: (e.clientX - rect.left) / rect.width,
       y: (e.clientY - rect.top) / rect.height,
     });
+
+    // 磁吸按钮
+    const btn = btnRef.current;
+    if (btn) {
+      const br = btn.getBoundingClientRect();
+      const bx = e.clientX - br.left - br.width / 2;
+      const by = e.clientY - br.top - br.height / 2;
+      btn.style.transform = `translate(${bx * 0.25}px, ${by * 0.25}px)`;
+      btn.style.transition = 'transform 0.15s ease-out';
+    }
+  };
+
+  const handleBtnLeave = () => {
+    if (btnRef.current) {
+      btnRef.current.style.transform = 'translate(0, 0)';
+      btnRef.current.style.transition = 'transform 0.5s var(--ease-out)';
+    }
   };
 
   const scrollToAbout = () => {
@@ -63,17 +81,24 @@ export default function Hero() {
           擅长 VR 交互内容策划、视频制作与 UI 视觉设计<br />
           用故事化的方式，让复杂变简单
         </motion.p>
-        <motion.a
-          href="#contact"
-          className="hero-cta"
-          variants={item}
-          onClick={(e) => {
-            e.preventDefault();
-            document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-          }}
+        <div
+          className="hero-cta-wrap"
+          onMouseLeave={handleBtnLeave}
         >
-          联 系 我
-        </motion.a>
+          <motion.a
+            ref={btnRef}
+            href="#contact"
+            className="hero-cta"
+            variants={item}
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <span className="hero-cta-text">联 系 我</span>
+            <span className="hero-cta-glow" />
+          </motion.a>
+        </div>
       </motion.div>
 
       <motion.button

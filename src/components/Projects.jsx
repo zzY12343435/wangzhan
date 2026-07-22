@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import useTilt from '../hooks/useTilt';
 import './Projects.css';
 
 const PROJECTS = [
@@ -26,6 +27,7 @@ const card = {
 
 function ProjectCard({ project }) {
   const [idx, setIdx] = useState(0);
+  const { ref, onMove, onLeave } = useTilt(5);
   const len = project.images.length;
 
   const prev = (e) => { e.stopPropagation(); setIdx((idx - 1 + len) % len); };
@@ -71,7 +73,7 @@ export default function Projects() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Selected Work
+          经历
         </motion.span>
         <motion.h2
           className="section-title"
@@ -94,6 +96,7 @@ export default function Projects() {
               whileInView="visible"
               viewport={{ once: true, margin: '-40px' }}
             >
+              <div className="project-card-tilt" ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}>
               <ProjectCard project={p} />
               <div className="project-info">
                 <div className="project-info-top">
@@ -103,6 +106,7 @@ export default function Projects() {
                 <span className="project-year">{p.year}</span>
               </div>
               <p className="project-desc">{p.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>

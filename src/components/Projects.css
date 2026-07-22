@@ -13,12 +13,20 @@
   cursor: pointer;
   background: var(--surface);
   border: 1px solid var(--border);
-  transition: border-color 0.35s, transform 0.35s var(--ease-out);
 }
-.project-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-4px);
+
+.project-card-tilt {
+  will-change: transform;
+  position: relative;
 }
+.project-card-tilt::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(136, 153, 184, 0.08) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.5s;
+}
+.project-card-tilt:hover::after { opacity: 1; }
 
 /* 图片区 */
 .project-img-wrap {
@@ -30,7 +38,8 @@
   cursor: pointer;
   transition: transform 0.5s var(--ease-out);
 }
-.project-card:hover .project-img { transform: scale(1.03); }
+.project-card-tilt:hover .project-img { transform: scale(1.03); }
+.project-card-tilt:hover { border-color: var(--border-hover); }
 .project-img-tag {
   width: 100%; height: 100%;
   object-fit: cover;

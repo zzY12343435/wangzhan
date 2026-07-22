@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { HiMail, HiLocationMarker, HiAcademicCap } from 'react-icons/hi';
+import useTilt from '../hooks/useTilt';
 import './About.css';
 
 const STATS = [
@@ -55,22 +56,31 @@ const imgVariant = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } }
 };
 
+function AboutImage() {
+  const { ref, onMove, onLeave } = useTilt(8);
+
+  return (
+    <motion.div
+      className="about-image"
+      variants={imgVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-60px' }}
+    >
+      <div className="about-img-placeholder" ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}>
+        <div className="about-img-glow" />
+        <img src={`${import.meta.env.BASE_URL}avatar.jpg`} alt="张兆亿" className="about-avatar" />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function About() {
   return (
     <section id="about" className="about">
       <div className="container">
         <div className="about-top">
-          <motion.div
-            className="about-image"
-            variants={imgVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-          >
-            <div className="about-img-placeholder">
-              <img src={`${import.meta.env.BASE_URL}avatar.jpg`} alt="张兆亿" className="about-avatar" />
-            </div>
-          </motion.div>
+          <AboutImage />
 
           <motion.div
             className="about-text"
@@ -79,7 +89,7 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
           >
-            <span className="section-tag">About</span>
+            <span className="section-tag">介绍</span>
             <h2 className="section-title">关于我</h2>
             <p className="section-desc">
               你好，我是<strong style={{color:'var(--white)',fontWeight:500}}>张兆亿</strong>，

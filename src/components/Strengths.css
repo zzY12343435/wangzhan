@@ -13,9 +13,18 @@
   display: flex; flex-direction: column; align-items: flex-start;
   padding: 40px 32px;
   background: var(--surface);
-  transition: background 0.35s;
+  transition: background 0.35s, transform 0.35s var(--ease-out);
+  position: relative; overflow: hidden;
 }
-.strength-card:hover { background: var(--surface2); }
+.strength-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(136, 153, 184, 0.06), transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+  pointer-events: none;
+}
+.strength-card:hover { background: var(--surface2); transform: translateY(-4px); }
+.strength-card:hover::after { opacity: 1; }
 
 .strength-icon {
   width: 48px; height: 48px;
@@ -23,6 +32,11 @@
   border-radius: 50%;
   background: var(--accent-dim);
   margin-bottom: 24px;
+  transition: background 0.35s, transform 0.35s var(--ease-out);
+}
+.strength-card:hover .strength-icon {
+  background: rgba(136, 153, 184, 0.25);
+  transform: scale(1.08);
 }
 .strength-icon svg {
   font-size: 22px; color: var(--accent);

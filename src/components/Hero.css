@@ -57,19 +57,51 @@
   font-size: 17px; color: var(--text-dim);
   line-height: 1.8; margin-bottom: 40px;
 }
-.hero-cta {
+.hero-cta-wrap {
   display: inline-block;
+  position: relative;
+}
+.hero-cta {
+  display: inline-block; position: relative; overflow: hidden;
   padding: 14px 36px;
   font-size: 14px; font-weight: 500; letter-spacing: 3px;
   color: var(--white);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 30px;
-  transition: all 0.35s;
+  transition: border-color 0.35s, background 0.35s;
+  will-change: transform;
+}
+.hero-cta-text {
+  position: relative; z-index: 2;
+}
+.hero-cta-glow {
+  position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(circle at center, rgba(136, 153, 184, 0.2), transparent 70%);
+  opacity: 0; transition: opacity 0.35s;
 }
 .hero-cta:hover {
   border-color: var(--accent);
-  color: var(--accent);
   background: var(--accent-dim);
+}
+.hero-cta:hover .hero-cta-glow { opacity: 1; }
+
+/* 标题渐变 */
+.hero-title-accent {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--accent);
+  text-stroke: 1px var(--accent);
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--accent), #b8c8e0, var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 0;
+  animation: shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%, 100% { background-position: 0% center; }
+  50%      { background-position: 200% center; }
 }
 
 /* 滚动指示器 */
