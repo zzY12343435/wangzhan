@@ -68,7 +68,7 @@ export default function About() {
             viewport={{ once: true, margin: '-60px' }}
           >
             <div className="about-img-placeholder">
-              <img src="/avatar.jpg" alt="张兆亿" className="about-avatar" />
+              <img src={`${import.meta.env.BASE_URL}avatar.jpg`} alt="张兆亿" className="about-avatar" />
             </div>
           </motion.div>
 

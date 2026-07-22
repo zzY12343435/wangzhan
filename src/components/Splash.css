@@ -6,10 +6,26 @@
   z-index: 999;
 }
 
-/* 粒子画布 */
-.splash-canvas {
-  position: absolute; inset: 0; z-index: 3;
-  pointer-events: none;
+/* 背景 */
+.splash-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: var(--bg);
+}
+
+/* 背景光晕呼吸 */
+.splash-bg::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 600px; height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(136, 153, 184, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: splashBreathe 4s ease-in-out infinite;
+}
+@keyframes splashBreathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  50%      { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
 }
 
 /* 内容包裹层 */
@@ -17,12 +33,6 @@
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
   flex-direction: column;
-}
-
-/* 背景 */
-.splash-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background: radial-gradient(ellipse at center, #111118 0%, #060608 70%);
 }
 
 /* 内容居中 */
@@ -36,7 +46,7 @@
 .splash-line-top,
 .splash-line-bottom {
   width: 40px; height: 1px;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.2);
   transform-origin: center;
 }
 .splash-line-top    { margin-bottom: 32px; }
@@ -69,7 +79,7 @@
   font-size: 13px; font-weight: 500;
   color: var(--text-dim);
   letter-spacing: 5px;
-  cursor: pointer;
+  cursor: none;
   transition: color 0.4s, gap 0.4s;
   background: none; border: none;
   padding: 8px 0;
@@ -81,9 +91,10 @@
 
 /* 底部小字 */
 .splash-bottom-text {
-  position: absolute; bottom: 36px;
+  position: absolute; bottom: 36px; left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-heading);
   font-size: 11px; letter-spacing: 3px;
-  color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.12);
   z-index: 2;
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Splash from './components/Splash';
+import Cursor from './components/Cursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -13,6 +14,7 @@ export default function App() {
   return (
     <>
       {/* 主页始终渲染在底层 */}
+      <Cursor />
       <Navbar />
       <main>
         <Hero />

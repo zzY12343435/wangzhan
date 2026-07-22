@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import './Hero.css';
 
@@ -16,23 +16,35 @@ const item = {
 
 export default function Hero() {
   const videoRef = useRef(null);
+  const heroRef = useRef(null);
+  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
     const el = videoRef.current;
     if (el) el.playbackRate = 0.75;
   }, []);
 
+  const handleMouseMove = (e) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    setMouse({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height,
+    });
+  };
+
   const scrollToAbout = () => {
     document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="hero" className="hero">
+    <section id="hero" className="hero" ref={heroRef} onMouseMove={handleMouseMove}>
       <div className="hero-bg">
-        {/* <video ref={videoRef} autoPlay muted loop playsInline poster="">
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video> */}
         <div className="hero-overlay" />
+        <div
+          className="hero-glow"
+          style={{ '--mx': mouse.x, '--my': mouse.y }}
+        />
       </div>
 
       <motion.div

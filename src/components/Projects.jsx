@@ -7,7 +7,7 @@ const PROJECTS = [
     title: '行星减速器虚拟仿真教学系统',
     cat: 'VR 交互内容',
     year: '2025',
-    images: ['/project-1.jpg', '/project-2.jpg'],
+    images: [`${import.meta.env.BASE_URL}project-1.jpg`, `${import.meta.env.BASE_URL}project-2.jpg`],
     desc: '独立策划并落地 VR 交互教学内容，覆盖用户调研、内容脚本、体验设计、数据回收全流程。设计"认知—拆装—原理"三阶学习路径，自研打字机对话系统模拟教师讲解节奏，零件高亮辅助与抓取反馈使装配错误率降低 32%。独立完成产品演示视频拍摄、剪辑、配音与字幕包装，使用 Photoshop 设计 UI 界面视觉素材。'
   },
 ];
