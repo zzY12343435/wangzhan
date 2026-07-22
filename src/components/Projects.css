@@ -1,0 +1,107 @@
+.projects { padding: var(--section-py) 0; }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.project-card {
+  position: relative;
+  border-radius: 4px; overflow: hidden;
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.35s, transform 0.35s var(--ease-out);
+}
+.project-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+}
+
+/* 图片区 */
+.project-img-wrap {
+  position: relative;
+}
+.project-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.5s var(--ease-out);
+}
+.project-card:hover .project-img { transform: scale(1.03); }
+.project-img-tag {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 切换控件 */
+.project-img-indicators {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--surface);
+}
+.project-img-arrow {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-dim); font-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s;
+  line-height: 1; padding: 0;
+}
+.project-img-arrow:hover {
+  border-color: var(--accent);
+  color: var(--white);
+}
+.project-img-dots { display: flex; gap: 6px; }
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.dot.active { background: var(--accent); }
+.dot:hover { background: var(--text-dim); }
+
+/* 信息区 */
+.project-info {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 20px 24px;
+}
+.project-info-top { display: flex; flex-direction: column; gap: 4px; }
+.project-title {
+  font-family: var(--font-heading);
+  font-size: 18px; font-weight: 500; color: var(--white);
+  letter-spacing: -0.3px;
+}
+.project-tag {
+  font-size: 12px; color: var(--text-dim);
+  letter-spacing: 1px;
+}
+.project-year {
+  font-family: var(--font-heading);
+  font-size: 13px; color: var(--accent);
+  letter-spacing: 1px;
+}
+
+/* 项目描述 */
+.project-desc {
+  padding: 0 24px 24px;
+  font-size: 14px; color: var(--text-dim);
+  line-height: 1.8;
+}
+
+/* 单列全宽卡片 */
+.project-card-full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}

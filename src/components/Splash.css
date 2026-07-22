@@ -1,0 +1,89 @@
+/* ============================================================
+   开场页
+   ============================================================ */
+.splash {
+  position: fixed; inset: 0;
+  z-index: 999;
+}
+
+/* 粒子画布 */
+.splash-canvas {
+  position: absolute; inset: 0; z-index: 3;
+  pointer-events: none;
+}
+
+/* 内容包裹层 */
+.splash-inner {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+
+/* 背景 */
+.splash-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse at center, #111118 0%, #060608 70%);
+}
+
+/* 内容居中 */
+.splash-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+}
+
+/* 横线 */
+.splash-line-top,
+.splash-line-bottom {
+  width: 40px; height: 1px;
+  background: rgba(255,255,255,0.3);
+  transform-origin: center;
+}
+.splash-line-top    { margin-bottom: 32px; }
+.splash-line-bottom { margin-top: 24px; margin-bottom: 44px; }
+
+/* 名字 */
+.splash-name {
+  font-family: var(--font-heading);
+  font-size: clamp(52px, 9vw, 96px);
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 12px;
+  line-height: 1;
+}
+
+/* 副标题 */
+.splash-tagline {
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 300;
+  color: var(--text-dim);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* ENTER 按钮 */
+.splash-enter {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 13px; font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 5px;
+  cursor: pointer;
+  transition: color 0.4s, gap 0.4s;
+  background: none; border: none;
+  padding: 8px 0;
+}
+.splash-arrow {
+  font-size: 16px;
+  display: inline-block;
+}
+
+/* 底部小字 */
+.splash-bottom-text {
+  position: absolute; bottom: 36px;
+  font-family: var(--font-heading);
+  font-size: 11px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.15);
+  z-index: 2;
+}
